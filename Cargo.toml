@@ -1,0 +1,6 @@
+[package]
+name = "collectors_curve"
+version = "0.1.0"
+authors = ["Steen Clarke <cmclarkey@gmail.com>"]
+
+[dependencies]
