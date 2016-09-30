@@ -21,7 +21,7 @@ fn main() {
     //after shuffle
     rand::thread_rng().shuffle(&mut data_vector);
 
-    println!("{:?}", data_vector);
+    // println!("{:?}", data_vector);
 
     let mut rarefaction = HashMap::new();
     let mut log_vector = vec![];
@@ -42,14 +42,14 @@ fn main() {
 
     for x in 0..log_vector.len() {
         if x == 0 {
-            println!("{}: {}, {}", x+1, log_vector[x], log_vector[x]);
+            println!("{}: {}", x+1, log_vector[x]);
         } else {
             running_total += log_vector[x];
             for y in 0..x {
                 running_total += log_vector[y];
                 // println!("{:?}", running_total);
             }
-            println!("{}: {}, {}", x+1, running_total, log_vector[x]);
+            println!("{}: {}", x+1, running_total);
             running_total = 0;
         }
     }
