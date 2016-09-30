@@ -1,19 +1,15 @@
 fn main() {
-    let data = ["aggaggt","aggaggt","gggacgt","gggacgt","gggactt"];
-    //println!("The array has {} elements", data.len());
+    let lines = "aggaggt\naggaggt\ngggacgt\ngggacgt\ngggactt".lines();
 
-    //let mut times = data.len();
+    let mut data_vector = vec![];
 
-    for x in 0..data.len() {
-        println!("The sequence is {}", data[x]);
+    for (linenumber, line) in lines.enumerate() {
+        println!("{}: {}", linenumber, line);
+        data_vector.push(line);
     }
 
-    // while !done {
-    //     println!("The sequence is {}", data[x]);
-    //     x += 1;
+    for x in 0..data_vector.len() {
+        println!("{}", data_vector[x]);
+    }
 
-    //     if x == data.len() {
-    //         done = true;
-    //     }
-    // }
 }
