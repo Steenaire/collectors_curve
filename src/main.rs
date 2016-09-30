@@ -3,15 +3,17 @@ fn main() {
     //println!("The array has {} elements", data.len());
 
     //let mut times = data.len();
-    let mut x = 0;
-    let mut done = false;
 
-    while !done {
+    for x in 0..data.len() {
         println!("The sequence is {}", data[x]);
-        x += 1;
-
-        if x == data.len() {
-            done = true;
-        }
     }
+
+    // while !done {
+    //     println!("The sequence is {}", data[x]);
+    //     x += 1;
+
+    //     if x == data.len() {
+    //         done = true;
+    //     }
+    // }
 }
