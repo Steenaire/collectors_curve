@@ -6,6 +6,7 @@ use std::collections::HashMap;
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
+use std::io::{BufWriter};
 use std::path::Path;
 
 fn main() {
@@ -63,15 +64,25 @@ fn main() {
 
     let mut running_total = 0;
 
+    
+    //Create a new file one directory up and put the results of the curve in there    
+    let f = File::create("../rarefaction_curve.txt").expect("Unable to create file");
+    let mut f = BufWriter::new(f);
+    let mut data = String::new();
+
+
     for x in 0..log_vector.len() {
         if x == 0 {
+            data = format!("Sample#\tUnique#\n{}\t{}\n", x+1, log_vector[x]);
+            f.write_all(data.as_bytes()).expect("Unable to write data");
             println!("{}: {}", x+1, log_vector[x]);
         } else {
             running_total += log_vector[x];
             for y in 0..x {
                 running_total += log_vector[y];
-                // println!("{:?}", running_total);
             }
+            data = format!("{}\t{}\n", x+1, running_total);
+            f.write_all(data.as_bytes()).expect("Unable to write data");
             println!("{}: {}", x+1, running_total);
             running_total = 0;
         }
