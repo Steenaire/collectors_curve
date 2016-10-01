@@ -8,7 +8,7 @@ fn main() {
 
     let mut data_vector = vec![];
 
-    for (linenumber, line) in lines.enumerate() {
+    for line in lines {
         // println!("{}: {}", linenumber, line);
         data_vector.push(line);
     }
