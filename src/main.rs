@@ -1,5 +1,6 @@
 extern crate rand;
 
+use std::io;
 use rand::Rng;
 use std::collections::HashMap;
 use std::error::Error;
@@ -8,7 +9,13 @@ use std::io::prelude::*;
 use std::path::Path;
 
 fn main() {
-    let path = Path::new("sequences.txt");
+    println!("Enter the path to the file of sequences:");
+    let mut input = String::new();
+
+    io::stdin().read_line(&mut input)
+        .expect("Failed to read input");
+
+    let path = Path::new(input.trim());
     let display = path.display();
     // let lines = "aggaggt\naggaggt\ngggacgt\ngggacgt\ngggactt".lines();
 
