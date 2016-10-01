@@ -2,30 +2,46 @@ extern crate rand;
 
 use rand::Rng;
 use std::collections::HashMap;
+use std::error::Error;
+use std::fs::File;
+use std::io::prelude::*;
+use std::path::Path;
 
 fn main() {
-    let lines = "aggaggt\naggaggt\ngggacgt\ngggacgt\ngggactt".lines();
+    let path = Path::new("sequences.txt");
+    let display = path.display();
+    // let lines = "aggaggt\naggaggt\ngggacgt\ngggacgt\ngggactt".lines();
+
+    // Open the path in read-only mode, returns `io::Result<File>`
+    let mut file = match File::open(&path) {
+        // The `description` method of `io::Error` returns a string that
+        // describes the error
+        Err(why) => panic!("couldn't open {}: {}", display,
+                                                   why.description()),
+        Ok(file) => file,
+    };
+
+    // Read the file contents into a string, returns `io::Result<usize>`
+    let mut file_string = String::new();
+    match file.read_to_string(&mut file_string) {
+        Err(why) => panic!("couldn't read {}: {}", display,
+                                                   why.description()),
+        Ok(_) => println!("Rarefaction curve:"),
+    }
+
+    let lines = file_string.lines();
 
     let mut data_vector = vec![];
 
     for line in lines {
-        // println!("{}: {}", linenumber, line);
         data_vector.push(line);
     }
-
-    //before shuffle
-    // for x in 0..data_vector.len() {
-    //     println!("{}", data_vector[x]);
-    // }
 
     //after shuffle
     rand::thread_rng().shuffle(&mut data_vector);
 
-    // println!("{:?}", data_vector);
-
     let mut rarefaction = HashMap::new();
     let mut log_vector = vec![];
-    // let mut log_hash = HashMap::new();
 
     //Sample the entire list of sequences, and if unique log it as 1, if not log it as 0
     for x in 0..data_vector.len() {
