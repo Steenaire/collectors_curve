@@ -42,7 +42,9 @@ fn main() {
     let mut data_vector = vec![];
 
     for line in lines {
-        data_vector.push(line);
+        if !line.starts_with('>') {
+            data_vector.push(line);
+        }
     }
 
     //after shuffle
